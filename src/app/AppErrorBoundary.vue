@@ -3,15 +3,15 @@ import { ref, onErrorCaptured } from 'vue'
 import { useRouter } from 'vue-router'
 import AppAlert from '../shared/ui/AppAlert.vue'
 import AppButton from '../shared/ui/AppButton.vue'
-import { useToastStore } from '../stores/toast'
+import { useUiStore } from '../stores/ui'
 
 const errorMessage = ref('')
 const router = useRouter()
-const toast = useToastStore()
+const ui = useUiStore()
 
 onErrorCaptured((error) => {
   errorMessage.value = error instanceof Error ? error.message : 'Неизвестная ошибка интерфейса'
-  toast.notify({
+  ui.notify({
     tone: 'error',
     title: 'Ошибка интерфейса',
     description: 'Показана страница восстановления.',

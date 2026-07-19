@@ -6,6 +6,7 @@ import {
   getDueReviewLessons,
   getUnlockedLessons,
 } from '../content/demoLearning'
+import { runtimePiniaStorage, storageKeys } from '../services/storage'
 
 export const useSessionStore = defineStore(
   'session',
@@ -49,8 +50,9 @@ export const useSessionStore = defineStore(
   },
   {
     persist: {
-      key: 'andro:session',
+      key: storageKeys.session,
       pick: ['schemaVersion', 'activeLessonId', 'completedToday', 'sessionMinutes', 'streakDays'],
+      storage: runtimePiniaStorage,
     },
   },
 )

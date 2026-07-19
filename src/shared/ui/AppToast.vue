@@ -9,11 +9,11 @@ import {
   ToastTitle,
   ToastViewport,
 } from 'reka-ui'
-import { useToastStore } from '../../stores/toast'
+import { useUiStore } from '../../stores/ui'
 import AppIconButton from './AppIconButton.vue'
 import { badgeTones } from './styles'
 
-const toastStore = useToastStore()
+const ui = useUiStore()
 </script>
 
 <template>
@@ -23,14 +23,14 @@ const toastStore = useToastStore()
         class="fixed bottom-4 right-4 z-[60] flex w-[calc(100vw-2rem)] max-w-sm flex-col gap-2"
       />
       <ToastRoot
-        v-for="toast in toastStore.toasts"
+        v-for="toast in ui.toasts"
         :key="toast.id"
         :duration="4200"
         :class="[
           'rounded-lg border bg-[var(--color-panel)] p-4 shadow-xl shadow-black/10',
           badgeTones[toast.tone],
         ]"
-        @update:open="(open) => !open && toastStore.dismiss(toast.id)"
+        @update:open="(open) => !open && ui.dismiss(toast.id)"
       >
         <div class="flex items-start gap-3">
           <div class="min-w-0 flex-1">

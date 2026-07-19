@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Clipboard } from '@lucide/vue'
-import { useToastStore } from '../../stores/toast'
+import { useUiStore } from '../../stores/ui'
 import AppIconButton from './AppIconButton.vue'
 
 const props = withDefaults(
@@ -15,11 +15,11 @@ const props = withDefaults(
   },
 )
 
-const toast = useToastStore()
+const ui = useUiStore()
 
 async function copyCode(): Promise<void> {
   if (!navigator.clipboard) {
-    toast.notify({
+    ui.notify({
       tone: 'warning',
       title: 'Буфер обмена недоступен',
       description: 'Код можно выделить вручную.',
@@ -28,7 +28,7 @@ async function copyCode(): Promise<void> {
   }
 
   await navigator.clipboard.writeText(props.code)
-  toast.notify({
+  ui.notify({
     tone: 'success',
     title: 'Код скопирован',
     description: 'Фрагмент помещен в буфер обмена.',

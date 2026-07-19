@@ -27,6 +27,7 @@
 - Линтинг: `npm run lint`.
 - Форматирование: `npm run format:check`; исправление форматирования: `npm run format`.
 - Unit/component tests: `npm run test`.
+- Валидация учебного контента: `npm run validate:content`.
 - E2E tests: script пока не настроен; если добавляешь Playwright, обнови [docs/TESTING.md](docs/TESTING.md).
 
 ## Архитектурные ограничения
@@ -63,7 +64,7 @@
 
 ## Обязательная проверка перед завершением задачи
 
-Минимум для текущего состояния проекта: `npm run lint`, `npm run typecheck`, `npm run test`, `npm run build`.
+Минимум для текущего состояния проекта: `npm run lint`, `npm run validate:content`, `npm run typecheck`, `npm run test`, `npm run build`.
 
 Если в ходе задачи добавлены scripts или зависимости для качества, также запускай соответствующие проверки: lint, typecheck, unit tests, e2e tests. Если проверку невозможно запустить, укажи точную причину в финальном отчете.
 

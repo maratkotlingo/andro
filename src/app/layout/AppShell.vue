@@ -15,8 +15,8 @@ import AppTooltip from '../../shared/ui/AppTooltip.vue'
 import { focusRing } from '../../shared/ui/styles'
 import type { BreadcrumbItem, DropdownItem } from '../../shared/ui/types'
 import { getDemoLesson } from '../../content/demoLearning'
-import { usePreferencesStore } from '../../stores/preferences'
-import { useToastStore } from '../../stores/toast'
+import { useSettingsStore } from '../../stores/settings'
+import { useUiStore } from '../../stores/ui'
 
 type UiErrorDetail = {
   message: string
@@ -24,8 +24,8 @@ type UiErrorDetail = {
 
 const route = useRoute()
 const router = useRouter()
-const preferences = usePreferencesStore()
-const toast = useToastStore()
+const settings = useSettingsStore()
+const ui = useUiStore()
 const mobileMenuOpen = ref(false)
 
 const userMenuItems: readonly DropdownItem[] = [
@@ -65,16 +65,16 @@ const breadcrumbs = computed<readonly BreadcrumbItem[]>(() => {
 })
 
 const themeLabel = computed(() =>
-  preferences.resolvedTheme === 'dark' ? 'Включить светлую тему' : 'Включить темную тему',
+  settings.resolvedTheme === 'dark' ? 'Включить светлую тему' : 'Включить темную тему',
 )
 
 function handleUserMenuSelect(id: string): void {
   if (id === 'theme') {
-    preferences.toggleResolvedTheme()
-    toast.notify({
+    settings.toggleResolvedTheme()
+    ui.notify({
       tone: 'success',
       title: 'Тема обновлена',
-      description: `Сейчас активна ${preferences.resolvedTheme === 'dark' ? 'темная' : 'светлая'} тема.`,
+      description: `Сейчас активна ${settings.resolvedTheme === 'dark' ? 'темная' : 'светлая'} тема.`,
     })
     return
   }
@@ -91,7 +91,7 @@ function handleUserMenuSelect(id: string): void {
 
 function handleErrorEvent(event: Event): void {
   const detail = (event as CustomEvent<UiErrorDetail>).detail
-  toast.notify({
+  ui.notify({
     tone: 'error',
     title: 'Ошибка интерфейса',
     description: detail.message,
@@ -175,8 +175,8 @@ onUnmounted(() => {
           <SessionIndicator compact />
 
           <AppTooltip :text="themeLabel">
-            <AppIconButton :label="themeLabel" @click="preferences.toggleResolvedTheme">
-              <Sun v-if="preferences.resolvedTheme === 'dark'" class="size-5" aria-hidden="true" />
+            <AppIconButton :label="themeLabel" @click="settings.toggleResolvedTheme">
+              <Sun v-if="settings.resolvedTheme === 'dark'" class="size-5" aria-hidden="true" />
               <Moon v-else class="size-5" aria-hidden="true" />
             </AppIconButton>
           </AppTooltip>

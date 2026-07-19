@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { usePreferencesStore, type ThemePreference } from '../stores/preferences'
+import { useSettingsStore, type ThemePreference } from '../stores/settings'
 import AppAlert from '../shared/ui/AppAlert.vue'
 import AppCard from '../shared/ui/AppCard.vue'
 import AppLinkButton from '../shared/ui/AppLinkButton.vue'
@@ -8,7 +8,7 @@ import AppPageHeader from '../shared/ui/AppPageHeader.vue'
 import AppSelect from '../shared/ui/AppSelect.vue'
 import type { SelectOption } from '../shared/ui/types'
 
-const preferences = usePreferencesStore()
+const settings = useSettingsStore()
 
 const themeOptions = [
   { value: 'system', label: 'Как в системе' },
@@ -21,10 +21,10 @@ function isThemePreference(value: string): value is ThemePreference {
 }
 
 const themeModel = computed({
-  get: () => preferences.theme,
+  get: () => settings.theme,
   set: (value: string) => {
     if (isThemePreference(value)) {
-      preferences.setTheme(value)
+      settings.setTheme(value)
     }
   },
 })

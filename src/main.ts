@@ -4,8 +4,8 @@ import App from './App.vue'
 import { createPinia } from 'pinia'
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import { router } from './app/router'
-import { usePreferencesStore } from './stores/preferences'
-import { useToastStore } from './stores/toast'
+import { useSettingsStore } from './stores/settings'
+import { useUiStore } from './stores/ui'
 
 const pinia = createPinia()
 pinia.use(piniaPluginPersistedstate)
@@ -15,14 +15,15 @@ const app = createApp(App)
 app.use(pinia)
 app.use(router)
 
-const preferences = usePreferencesStore(pinia)
-const toast = useToastStore(pinia)
+const settings = useSettingsStore(pinia)
+const ui = useUiStore(pinia)
 
-preferences.startThemeSync()
+settings.startThemeSync()
+settings.startStorageSync()
 
 app.config.errorHandler = (error, _instance, info) => {
   const message = error instanceof Error ? error.message : 'Неизвестная ошибка интерфейса'
-  toast.notify({
+  ui.notify({
     tone: 'error',
     title: 'Ошибка интерфейса',
     description: message,

@@ -9,12 +9,13 @@
 - `npm run format:check` - Prettier check;
 - `npm run typecheck` - `vue-tsc -b`;
 - `npm run test` - Vitest unit/component tests;
+- `npm run validate:content` - Zod и graph validation для учебного контента;
 - `npm run build` - `vue-tsc -b` и `vite build`;
 - `npm run preview` - preview production-сборки.
 
 Отдельного script для e2e tests пока нет.
 
-Минимальная обязательная проверка для текущего состояния: `npm run lint`, `npm run typecheck`, `npm run test`, `npm run build`.
+Минимальная обязательная проверка для текущего состояния: `npm run lint`, `npm run validate:content`, `npm run typecheck`, `npm run test`, `npm run build`.
 
 ## Typecheck
 

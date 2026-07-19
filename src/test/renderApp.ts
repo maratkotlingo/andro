@@ -4,7 +4,12 @@ import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import { createMemoryHistory, createRouter, type Router } from 'vue-router'
 import App from '../App.vue'
 import { routes } from '../app/router'
-import { usePreferencesStore } from '../stores/preferences'
+import { useSettingsStore } from '../stores/settings'
+import {
+  configureStorageRuntime,
+  createMemoryBrowserStorage,
+  createStorageRuntime,
+} from '../services/storage'
 
 export type MountedApp = {
   wrapper: VueWrapper
@@ -13,6 +18,7 @@ export type MountedApp = {
 }
 
 export async function mountApp(path = '/'): Promise<MountedApp> {
+  configureStorageRuntime(createStorageRuntime(createMemoryBrowserStorage(), 0))
   const pinia = createPinia()
   pinia.use(piniaPluginPersistedstate)
 
@@ -22,8 +28,8 @@ export async function mountApp(path = '/'): Promise<MountedApp> {
     scrollBehavior: () => ({ top: 0 }),
   })
 
-  const preferences = usePreferencesStore(pinia)
-  preferences.startThemeSync()
+  const settings = useSettingsStore(pinia)
+  settings.startThemeSync()
 
   await router.push(path)
   await router.isReady()
