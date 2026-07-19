@@ -34,7 +34,7 @@ export const contentVersionSchema = z.object({
 
 export const hintSchema = z.object({
   id: idSchema,
-  level: z.number().int().min(1).max(3),
+  level: z.number().int().min(1).max(4),
   body: z.string().min(1),
 })
 
@@ -394,14 +394,22 @@ export const exerciseAttemptSchema = z.object({
   id: idSchema,
   exerciseId: idSchema,
   lessonId: idSchema,
+  startedAt: isoDateSchema.optional(),
   answeredAt: isoDateSchema,
+  durationSeconds: z.number().int().min(0).optional(),
   usedHintIds: z.array(idSchema),
+  viewedSolution: z.boolean().optional(),
+  selfReproduced: z.boolean().optional(),
+  misconceptionTags: z.array(idSchema).optional(),
+  isReview: z.boolean().optional(),
+  quality: z.enum(['again', 'hard', 'good', 'easy']).optional(),
   answer: z.unknown(),
   result: exerciseResultSchema,
 })
 
 export const reviewScheduleSchema = z.object({
   intervalDays: z.number().int().min(0),
+  intervalMinutes: z.number().int().min(10).optional(),
   ease: z.number().min(1.3).max(2.8),
   dueAt: isoDateSchema,
   lastReviewedAt: isoDateSchema.optional(),
