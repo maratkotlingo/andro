@@ -21,11 +21,13 @@
 
 - Установка: `npm ci` для воспроизводимой установки по `package-lock.json`; `npm install` только при осознанном обновлении зависимостей.
 - Разработка: `npm run dev`.
-- Typecheck: `npx vue-tsc -b`.
+- Typecheck: `npm run typecheck`.
 - Сборка: `npm run build` - запускает `vue-tsc -b` и `vite build`.
 - Preview production-сборки: `npm run preview`.
-- Линтинг: отдельный `lint`-script пока не настроен. Если добавляешь ESLint, зафиксируй команду здесь и в [docs/TESTING.md](docs/TESTING.md).
-- Unit/e2e тесты: scripts пока не настроены. Если добавляешь Vitest или Playwright, обнови [docs/TESTING.md](docs/TESTING.md).
+- Линтинг: `npm run lint`.
+- Форматирование: `npm run format:check`; исправление форматирования: `npm run format`.
+- Unit/component tests: `npm run test`.
+- E2E tests: script пока не настроен; если добавляешь Playwright, обнови [docs/TESTING.md](docs/TESTING.md).
 
 ## Архитектурные ограничения
 
@@ -61,7 +63,7 @@
 
 ## Обязательная проверка перед завершением задачи
 
-Минимум для текущего состояния проекта: `npm run build`.
+Минимум для текущего состояния проекта: `npm run lint`, `npm run typecheck`, `npm run test`, `npm run build`.
 
 Если в ходе задачи добавлены scripts или зависимости для качества, также запускай соответствующие проверки: lint, typecheck, unit tests, e2e tests. Если проверку невозможно запустить, укажи точную причину в финальном отчете.
 

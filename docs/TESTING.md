@@ -5,12 +5,16 @@
 Текущий `package.json` содержит:
 
 - `npm run dev` - dev server;
+- `npm run lint` - ESLint;
+- `npm run format:check` - Prettier check;
+- `npm run typecheck` - `vue-tsc -b`;
+- `npm run test` - Vitest unit/component tests;
 - `npm run build` - `vue-tsc -b` и `vite build`;
 - `npm run preview` - preview production-сборки.
 
-Отдельных scripts для lint, unit tests и e2e tests пока нет.
+Отдельного script для e2e tests пока нет.
 
-Минимальная обязательная проверка для текущего состояния: `npm run build`.
+Минимальная обязательная проверка для текущего состояния: `npm run lint`, `npm run typecheck`, `npm run test`, `npm run build`.
 
 ## Typecheck
 
@@ -24,7 +28,7 @@ TypeScript ошибки нельзя закрывать через `any`, кро
 
 ## Unit tests
 
-Когда будет добавлен Vitest, в первую очередь покрыть:
+Vitest подключен. В первую очередь покрывать:
 
 - `domain/checking/normalize`;
 - `domain/checking/tokenize`;
@@ -39,7 +43,7 @@ Domain tests не должны монтировать Vue.
 
 ## Component tests
 
-После добавления Vue Test Utils покрыть:
+Vue Test Utils подключен. В первую очередь покрывать:
 
 - отображение типа проверки;
 - раскрытие подсказок и влияние на состояние;
@@ -84,14 +88,11 @@ Domain tests не должны монтировать Vue.
 
 ## Команды будущего качества
 
-Если добавляются инструменты, scripts должны быть стандартными:
+Если добавляются e2e-инструменты, scripts должны быть стандартными:
 
 ```json
 {
   "scripts": {
-    "lint": "eslint .",
-    "test": "vitest run",
-    "test:watch": "vitest",
     "test:e2e": "playwright test"
   }
 }
